@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.20;
+pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
@@ -15,28 +15,16 @@ contract Avive is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
     _mint(initialOwner_, initialSupply_);
   }
 
-  /**
-   * @dev pause only by owner if necessary
-   */
   function pause() public onlyOwner {
     _pause();
   }
 
-  /**
-   * @dev unPause only by owner if necessary
-   */
   function unpause() public onlyOwner {
     _unpause();
   }
 
   // The following functions are overrides required by Solidity.
 
-  /**
-   * @dev Required by Solidity.
-   * @param from address
-   * @param to address
-   * @param value uint256
-   */
   function _update(
     address from,
     address to,

@@ -30,7 +30,7 @@ the most common commands are:
 3. deploy
 
    ```bash
-   pnpm hardhat run --network arbitrumGoerli scripts/01-deploy.ts
+   pnpm hardhat run --network arbitrumGoerli scripts/01-deploy.js
    ```
 
    > the deploy script will deploy the contract to the arbitrum testnet
