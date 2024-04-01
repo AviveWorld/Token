@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat';
 import { Wallet } from 'ethers';
 
-import { deployContractWithDeployer } from '../src/utils';
+import { deployContractWithDeployer } from '../../src/utils';
 
 (async () => {
   const deployer = new Wallet(process.env.DEPLOYER_PRIVATE_KEY!);
