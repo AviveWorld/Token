@@ -15,7 +15,7 @@ describe('ownership test', function () {
   let AviveTokenomics: AviveTokenomics;
   let accounts: Signer[];
 
-  const START_MONTH = 4; // the first 3 months are already released
+  const START_MONTH = 5; // the first 5 months are already released
 
   before(async () => {
     // @ts-ignore
@@ -55,7 +55,7 @@ describe('ownership test', function () {
       );
       expect(releaseSchedule.released).equal(i < START_MONTH ? true : false);
       total += BigInt(item.amount.replace(/,/g, ''));
-      if (i >= 3) {
+      if (i >= START_MONTH) {
         futureAmount += BigInt(item.amount.replace(/,/g, ''));
       }
     }
