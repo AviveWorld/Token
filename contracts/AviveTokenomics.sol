@@ -297,7 +297,7 @@ contract AviveTokenomics is Ownable {
    * @notice Release tokens for a specific round. Only the mulitisig owner can call this function
    * @param round the round number to release
    */
-  function releaseByMonth(uint256 round) external onlyOwner {
+  function releaseByMonth(uint8 round) external onlyOwner {
     Release storage release = releaseSchedule[round];
     require(block.timestamp >= release.time, "Release time not reached");
     require(round <= totalMonths, "Invalid round");
