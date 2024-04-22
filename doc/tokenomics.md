@@ -4,7 +4,7 @@
 
 1. Avive ERC20 Token has already been issued on the Arbitrum One network(0x5117f4Ad0bc70Dbb3B05bF39A1EC1Ee40DD67654).
 2. The Avive Tokenomics Contract will serve as the vault for the unlocked tokens, which will be released every month by the owner through a multi-signature safe contract(0xA5Cf6cda40cdB179670f5DdC18c2D1057CD49c3B).
-3. The tokenomic plan is predefined in the following table, and as of the time of writing, the first 4 months' allocations have already been released. The total amount is 10B.
+3. The tokenomic plan is predefined in the following table, and as of the time of writing, the first 5 months' allocations(up to 2024-04) have already been released. The previous Avive Token vault contract is 0x071F29f17c0C1090b4FdBf88A1c93CD9e2c25dc6.The total amount is 10B.
 
 ```txt
 date	    Avive builder	Ecosystem	Partnership Development	Community	all
