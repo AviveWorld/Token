@@ -18,7 +18,7 @@ const config: HardhatUserConfig = {
         version: '0.8.20',
         settings: {
           optimizer: { enabled: true, runs: 800 },
-          // set it to paris explicitly to compitable with arbitrum One or other L2 (which don't support the PUSH0 opcode).
+          // set it to paris explicitly to compatible with arbitrum One or other L2 (which don't support the PUSH0 opcode).
           evmVersion: 'paris',
         },
       },
@@ -31,6 +31,11 @@ const config: HardhatUserConfig = {
     arbitrumGoerli: {
       url: 'https://goerli-rollup.arbitrum.io/rpc',
       chainId: 421613,
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY!],
+    },
+    arbitrumSepolia: {
+      url: 'https://sepolia-rollup.arbitrum.io/rpc',
+      chainId: 421614,
       accounts: [process.env.DEPLOYER_PRIVATE_KEY!],
     },
     arbitrumPrerelease: {

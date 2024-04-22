@@ -1,6 +1,6 @@
 # Avive Tokenomics
 
-## Attentions
+## Project description
 
 1. Avive ERC20 Token has already been issued on the Arbitrum One network(0x5117f4Ad0bc70Dbb3B05bF39A1EC1Ee40DD67654).
 2. The Avive Tokenomics Contract will serve as the vault for the unlocked tokens, which will be released every month by the owner through a multi-signature safe contract(0xA5Cf6cda40cdB179670f5DdC18c2D1057CD49c3B).
@@ -70,6 +70,28 @@ date	    Avive builder	Ecosystem	Partnership Development	Community	all
 2028-11-01	0 	            0 	                0 	            33,000,008 	    33,000,008
 ```
 
+## Technology Description
+
+1. This project is a solidity smart contract which will be deployed on the arbitrumOne network.
+2. To compatible with the arbitrumOne, the hardhat solidity compiler should set a specific `evmVersion` like this in the `hardhat.configt.ts`.(reffer to hardhat config official document: https://hardhat.org/hardhat-runner/docs/config#default-evm-version)
+
+   ```js
+   module.exports = {
+     solidity: {
+       compilers: [
+         {
+           version: '0.8.20',
+           settings: {
+             optimizer: { enabled: true, runs: 800 },
+             // set it to paris explicitly to compatible with arbitrum One or other L2 (which don't support the PUSH0 opcode).
+             evmVersion: 'paris',
+           },
+         },
+       ],
+     },
+   };
+   ```
+
 ## Development
 
 ### hardhat
@@ -84,6 +106,8 @@ the most common commands are:
    pnpm hardhat compile
    ```
 
+````
+
 2. test
 
    ```bash
@@ -92,8 +116,17 @@ the most common commands are:
 
 3. deploy
 
-   ```bash
-   pnpm hardhat run --network arbitrumGoerli scripts/tokenomics/01-deploy.ts
-   ```
+## Deployment
 
-   > the deploy script will deploy the contract to the arbitrum testnet
+1. sepolia for test
+
+```bash
+ pnpm hardhat run --network arbitrumSepolia scripts/tokenomics/01-deploy.ts
+```
+
+2. mainnet
+
+```bash
+ pnpm hardhat run --network arbitrumOne scripts/tokenomics/01-deploy.ts
+```
+````

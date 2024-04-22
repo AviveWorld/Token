@@ -82,12 +82,18 @@ contract AviveTokenomics is Ownable {
 
   event LogReleased(uint8 round, uint256 amount);
 
+  // Release tokens for 60 months
   uint256 constant totalMonths = 60;
 
   // Mapping of release schedule
   // The key is the round number, total 60 rounds
   mapping(uint256 => Release) public releaseSchedule;
 
+  /**
+   * @notice Constructor
+   * @param _owner the owner of the contract, should be the Avive multisig account. It shouldn't be the deployer, only safe multisig account
+   * @param _aviveToken the address of the Avive token
+   */
   constructor(address _owner, IERC20 _aviveToken) Ownable(_owner) {
     aviveToken = _aviveToken;
 
@@ -275,7 +281,7 @@ contract AviveTokenomics is Ownable {
     _releaseTimes[59] = 1856649600;
     _releaseAmounts[59] = 33000008 ether;
 
-    for (uint i = 0; i < _releaseTimes.length; i++) {
+    for (uint256 i = 0; i < _releaseTimes.length; i++) {
       // The first 5 months are already settled
       bool isReleased = _releaseTimes[i] < _releaseTimes[5] ? true : false;
       // Set release schedule
@@ -287,7 +293,11 @@ contract AviveTokenomics is Ownable {
     }
   }
 
-  function releaseByMonth(uint8 round) external onlyOwner {
+  /**
+   * @notice Release tokens for a specific round. Only the mulitisig owner can call this function
+   * @param round the round number to release
+   */
+  function releaseByMonth(uint256 round) external onlyOwner {
     Release storage release = releaseSchedule[round];
     require(block.timestamp >= release.time, "Release time not reached");
     require(round <= totalMonths, "Invalid round");

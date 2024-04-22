@@ -25,10 +25,16 @@ the most common commands are:
    pnpm hardhat test
    ```
 
-3. deploy
+## Deployment
 
-   ```bash
-   pnpm hardhat run --network arbitrumGoerli scripts/avietoken/01-deploy.ts
-   ```
+1. sepolia for test
 
-   > the deploy script will deploy the contract to the arbitrum testnet
+```bash
+ pnpm hardhat run --network arbitrumSepolia scripts/avietoken/01-deploy.ts
+```
+
+2. mainnet
+
+```bash
+ pnpm hardhat run --network arbitrumOne scripts/avietoken/01-deploy.ts
+```
