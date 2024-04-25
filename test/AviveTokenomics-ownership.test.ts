@@ -61,4 +61,18 @@ describe('ownership test', function () {
       AviveTokenomics.connect(deployer).releaseByMonth(1),
     ).to.revertedWithCustomError(AviveTokenomics, 'OwnableUnauthorizedAccount');
   });
+
+  it('illegal to call renounceOwnership', async () => {
+    const deployer_address = await deployer.getAddress();
+    const owner_address = await owner.getAddress();
+
+    expect(await AviveTokenomics.owner()).equal(owner_address);
+    await expect(
+      AviveTokenomics.connect(deployer).renounceOwnership(),
+    ).to.revertedWithCustomError(AviveTokenomics, 'OwnableUnauthorizedAccount');
+
+    await expect(
+      AviveTokenomics.connect(owner).renounceOwnership(),
+    ).to.revertedWith('Not allowed');
+  });
 });

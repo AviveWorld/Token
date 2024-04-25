@@ -312,4 +312,11 @@ contract AviveTokenomics is Ownable {
     release.released = true;
     emit LogReleased(round, release.amount);
   }
+
+  /**
+   * @notice Override the renounce ownership to avoid potential security risks
+   */
+  function renounceOwnership() public view override onlyOwner {
+    revert("Not allowed");
+  }
 }
