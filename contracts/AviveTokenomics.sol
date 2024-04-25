@@ -83,7 +83,7 @@ contract AviveTokenomics is Ownable {
   event LogReleased(uint8 round, uint256 amount);
 
   // Release tokens for 60 months
-  uint256 constant totalMonths = 60;
+  uint256 constant TOTAL_MONTHS = 60;
 
   // Mapping of release schedule
   // The key is the round number, total 60 rounds
@@ -100,8 +100,8 @@ contract AviveTokenomics is Ownable {
     aviveToken = _aviveToken;
 
     // Define release times and amounts following the tokenomics
-    uint256[] memory _releaseTimes = new uint256[](totalMonths);
-    uint256[] memory _releaseAmounts = new uint256[](totalMonths);
+    uint256[] memory _releaseTimes = new uint256[](TOTAL_MONTHS);
+    uint256[] memory _releaseAmounts = new uint256[](TOTAL_MONTHS);
     // round 1 2023-12-01T00:00:00Z 942,000,000
     _releaseTimes[0] = 1701388800;
     _releaseAmounts[0] = 942000000 ether;
@@ -302,7 +302,7 @@ contract AviveTokenomics is Ownable {
   function releaseByMonth(uint8 round) external onlyOwner {
     Release storage release = releaseSchedule[round];
     require(block.timestamp >= release.time, "Release time not reached");
-    require(round <= totalMonths, "Invalid round");
+    require(round <= TOTAL_MONTHS, "Invalid round");
     require(!release.released, "Already released");
     require(release.amount > 0, "No tokens to release");
     require(
