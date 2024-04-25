@@ -95,6 +95,8 @@ contract AviveTokenomics is Ownable {
    * @param _aviveToken the address of the Avive token
    */
   constructor(address _owner, IERC20 _aviveToken) Ownable(_owner) {
+    require(_owner != address(0), "Invalid owner address");
+    require(address(_aviveToken) != address(0), "Invalid token address");
     aviveToken = _aviveToken;
 
     // Define release times and amounts following the tokenomics
