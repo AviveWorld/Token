@@ -307,9 +307,8 @@ contract AviveTokenomics is Ownable {
       aviveToken.balanceOf(address(this)) >= release.amount,
       "Not enough tokens to release"
     );
-
-    aviveToken.transfer(owner(), release.amount);
     release.released = true;
+    aviveToken.transfer(owner(), release.amount);
     emit LogReleased(round, release.amount);
   }
 
