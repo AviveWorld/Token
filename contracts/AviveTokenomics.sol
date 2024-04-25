@@ -85,6 +85,9 @@ contract AviveTokenomics is Ownable {
   // Release tokens for 60 months
   uint256 constant TOTAL_MONTHS = 60;
 
+  // The first 5 months are already settled by airdrop
+  uint256 constant ALREADY_RELEASED_MONTHS = 5;
+
   // Mapping of release schedule
   // The key is the round number, total 60 rounds
   mapping(uint256 => Release) public releaseSchedule;
@@ -285,7 +288,10 @@ contract AviveTokenomics is Ownable {
 
     for (uint256 i = 0; i < _releaseTimes.length; i++) {
       // The first 5 months are already settled
-      bool isReleased = _releaseTimes[i] < _releaseTimes[5] ? true : false;
+      bool isReleased = _releaseTimes[i] <
+        _releaseTimes[ALREADY_RELEASED_MONTHS]
+        ? true
+        : false;
       // Set release schedule
       releaseSchedule[i + 1] = Release(
         _releaseTimes[i],
