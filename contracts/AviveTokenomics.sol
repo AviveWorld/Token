@@ -300,7 +300,9 @@ contract AviveTokenomics is Ownable {
    * @param round the round number to release
    */
   function releaseByMonth(uint8 round) external onlyOwner {
-    Release storage release = releaseSchedule[round];
+    // Assigning releaseSchedule[round] values to the release variable through the storage:
+    Release memory release = releaseSchedule[round];
+    // Calls to storage structure values via release.
     require(block.timestamp >= release.time, "Release time not reached");
     require(round <= TOTAL_MONTHS, "Invalid round");
     require(!release.released, "Already released");
@@ -309,7 +311,8 @@ contract AviveTokenomics is Ownable {
       AVIVE_TOKEN.balanceOf(address(this)) >= release.amount,
       "Not enough tokens to release"
     );
-    release.released = true;
+    // Update the release status
+    releaseSchedule[round].released = true;
     AVIVE_TOKEN.transfer(owner(), release.amount);
     emit LogReleased(round, release.amount);
   }
