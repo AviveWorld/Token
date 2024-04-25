@@ -72,7 +72,7 @@ date	    Avive builder	Ecosystem	Partnership Development	Community	all
  * @notice Contract for releasing Avive tokens on a monthly basis
  */
 contract AviveTokenomics is Ownable {
-  IERC20 public aviveToken;
+  IERC20 public immutable AVIVE_TOKEN;
 
   struct Release {
     uint256 time;
@@ -97,7 +97,7 @@ contract AviveTokenomics is Ownable {
   constructor(address _owner, IERC20 _aviveToken) Ownable(_owner) {
     require(_owner != address(0), "Invalid owner address");
     require(address(_aviveToken) != address(0), "Invalid token address");
-    aviveToken = _aviveToken;
+    AVIVE_TOKEN = _aviveToken;
 
     // Define release times and amounts following the tokenomics
     uint256[] memory _releaseTimes = new uint256[](TOTAL_MONTHS);
@@ -306,11 +306,11 @@ contract AviveTokenomics is Ownable {
     require(!release.released, "Already released");
     require(release.amount > 0, "No tokens to release");
     require(
-      aviveToken.balanceOf(address(this)) >= release.amount,
+      AVIVE_TOKEN.balanceOf(address(this)) >= release.amount,
       "Not enough tokens to release"
     );
     release.released = true;
-    aviveToken.transfer(owner(), release.amount);
+    AVIVE_TOKEN.transfer(owner(), release.amount);
     emit LogReleased(round, release.amount);
   }
 
